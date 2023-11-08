@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import * as dotenv from "dotenv";
 import { getHttpEndpoint } from "@orbs-network/ton-access";
 import { mnemonicToWalletKey } from "ton-crypto";
 import { TonClient, Cell, WalletContractV4 } from "@ton/ton";
@@ -21,7 +22,7 @@ export async function run() {
     }
 
     // open wallet v4 (notice the correct wallet version here)
-    const mnemonic = "unfold sugar water ..."; // your 24 secret words (replace ... with the rest of the words)
+    const mnemonic = process.env.MNEMONIC!; // your 24 secret words (replace ... with the rest of the words)
     const key = await mnemonicToWalletKey(mnemonic.split(" "));
     const wallet = WalletContractV4.create({ publicKey: key.publicKey, workchain: 0 });
     if (!await client.isContractDeployed(wallet.address)) {

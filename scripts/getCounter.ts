@@ -8,7 +8,7 @@ export async function run() {
     const client = new TonClient({ endpoint });
 
     // open Counter instance by address
-    const counterAddress = Address.parse("EQCtaYHX2qPhsThg4UCajpp4uUA4qCeaznKhrn676q5Gghox"); // replace with your address from step 8
+    const counterAddress = Address.parse("EQDYOmv_rQXifWNqkrHzPERRJEBwHyBOplPgXJDGbu7p3mp8"); // replace with your address from step 8
     const counter = new Counter(counterAddress);
     const counterContract = client.open(counter);
 

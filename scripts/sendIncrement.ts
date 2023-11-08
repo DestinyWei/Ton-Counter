@@ -1,3 +1,4 @@
+import * as dotenv from "dotenv";
 import { getHttpEndpoint } from "@orbs-network/ton-access";
 import { mnemonicToWalletKey } from "ton-crypto";
 import { TonClient, WalletContractV4, Address } from "@ton/ton";
@@ -9,7 +10,7 @@ export async function run() {
     const client = new TonClient({ endpoint });
 
     // open wallet v4 (notice the correct wallet version here)
-    const mnemonic = "unfold sugar water ..."; // your 24 secret words (replace ... with the rest of the words)
+    const mnemonic = process.env.MNEMONIC!; // your 24 secret words (replace ... with the rest of the words)
     const key = await mnemonicToWalletKey(mnemonic.split(" "));
     const wallet = WalletContractV4.create({ publicKey: key.publicKey, workchain: 0 });
     if (!await client.isContractDeployed(wallet.address)) {
@@ -22,7 +23,7 @@ export async function run() {
     const seqno = await walletContract.getSeqno();
 
     // open Counter instance by address
-    const counterAddress = Address.parse("EQCtaYHX2qPhsThg4UCajpp4uUA4qCeaznKhrn676q5Gghox"); // replace with your address from step 8
+    const counterAddress = Address.parse("EQDYOmv_rQXifWNqkrHzPERRJEBwHyBOplPgXJDGbu7p3mp8"); // replace with your address from step 8
     const counter = new Counter(counterAddress);
     const counterContract = client.open(counter);
 

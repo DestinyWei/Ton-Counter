@@ -9,6 +9,10 @@
 
 ## How to use
 
+### Create .env
+
+copy `.env.example` file named `.env` and write down your 24 mnemonic phases
+
 ### Build
 
 `npx blueprint build` or `yarn blueprint build`
